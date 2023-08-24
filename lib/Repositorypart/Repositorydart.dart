@@ -13,7 +13,7 @@ class RepositoryDart{
     }
     else
     {
-      throw Exception(responsing.statusCode.toString());
+      throw Exception("Error in getting all photos");
     }
   }
 }
