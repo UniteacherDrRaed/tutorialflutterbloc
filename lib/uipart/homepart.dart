@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tutorialflutterbloc/repositorypart/repositorydart.dart';
+
 import 'package:tutorialflutterbloc/blocpart/blocdart.dart';
 import 'package:tutorialflutterbloc/blocpart/statespart.dart';
 import 'package:tutorialflutterbloc/modelpart/photodart.dart';
+import '../repositorypart/repositorydart.dart';
 
 class HomePart extends StatelessWidget {
   const HomePart({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context)=>BlocDart(RepositoryDart()),
-      child: Scaffold(
+ Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (BuildContext context)=>BlocDart(RepositoryDart()))
+      ],
+       child:  Scaffold(
       appBar: AppBar(
         title: const Text("photos"),
         backgroundColor:Colors.pink ,
@@ -42,8 +45,9 @@ class HomePart extends StatelessWidget {
         }
         ),
       )
-    ); 
-  }
+    );
+    }
+
 
   Widget _showCircularProgressIndicator() =>Container(
               color: Colors.pink.shade100,
