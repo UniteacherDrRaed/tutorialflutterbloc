@@ -1,10 +1,11 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:tutorialflutterbloc/blocpart/blocdart.dart';
+import 'package:tutorialflutterbloc/blocpart/eventpart.dart';
 import 'package:tutorialflutterbloc/blocpart/statespart.dart';
 import 'package:tutorialflutterbloc/modelpart/photodart.dart';
-import '../repositorypart/repositorydart.dart';
+import 'package:tutorialflutterbloc/repositorypart/repositorydart.dart';
 
 class HomePart extends StatelessWidget {
   const HomePart({super.key});
@@ -20,7 +21,8 @@ class HomePart extends StatelessWidget {
         title: const Text("photos"),
         backgroundColor:Colors.pink ,
       ),
-      body: BlocBuilder<BlocDart,StatesPart>(
+      body: BlocProvider(create: (BuildContext context)=>BlocDart(RepositoryDart())..add(GetPhotosEvent()),
+      child: BlocBuilder<BlocDart,StatesPart>(
         builder:(context,state)
         {
           if(state is GettingPhotState)
@@ -44,7 +46,7 @@ class HomePart extends StatelessWidget {
       
         }
         ),
-      )
+      ))
     );
     }
 
@@ -64,14 +66,17 @@ class HomePart extends StatelessWidget {
     itemCount: listphotos.length,
     itemBuilder: ((context, index) {
       return Container(
+        margin: const EdgeInsets.all(10),
         color: Colors.pink.shade100,
         padding: const EdgeInsets.all(10),
-        child:Row(
+        child:Column(
           children: [
+            Row(children: [
             Text("albumId ${listphotos[index].albumId}"),
+            const SizedBox(width: 40,),
             Text("id ${listphotos[index].id}"),
+            ],),
             Text("title ${listphotos[index].title}"),
-            Image.network(listphotos[index].url),
             
           ],
         ),
