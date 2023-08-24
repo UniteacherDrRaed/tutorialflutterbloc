@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tutorialflutterbloc/Repositorypart/Repositorydart.dart';
+import 'package:tutorialflutterbloc/repositorypart/repositorydart.dart';
 import 'package:tutorialflutterbloc/blocpart/eventpart.dart';
 import 'package:tutorialflutterbloc/blocpart/statespart.dart';
 
